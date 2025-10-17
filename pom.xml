@@ -82,6 +82,7 @@
                 <os>
                     <family>windows</family>
                 </os>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <jpackage.icon>src/main/resources/com/cobuilding/cblogored.ico</jpackage.icon>
