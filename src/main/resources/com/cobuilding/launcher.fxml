@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane" prefHeight="550.0" prefWidth="400.0" styleClass="root" stylesheets="@launcher.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cobuilding.LauncherController">
+    <top>
+        <HBox fx:id="titleBar" alignment="CENTER_LEFT" styleClass="title-bar">
+            <padding><Insets left="10.0" /></padding>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image><Image url="@cblogored.png" /></image>
+            </ImageView>
+            <Label styleClass="title-label" text="cobuilding Launcher"><padding><Insets left="10.0" /></padding></Label>
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="window-button" text="⚙" />
+            <Button fx:id="minimizeButton" mnemonicParsing="false" styleClass="window-button" text="—" />
+            <Button fx:id="closeButton" mnemonicParsing="false" styleClass="window-button,close-button" text="✕" />
+        </HBox>
+    </top>
+    <center>
+        <StackPane>
+            <VBox fx:id="mainView" alignment="CENTER" spacing="20.0">
+                <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image><Image url="@cblogored.png" /></image>
+                </ImageView>
+                <Label fx:id="statusLabel" styleClass="status-label" text="Введите никнейм и нажмите 'Играть'" />
+                <TextField fx:id="nicknameField" maxWidth="250.0" promptText="Ваш никнейм" styleClass="nickname-field" />
+                <ProgressBar fx:id="progressBar" maxWidth="250.0" progress="0.0" styleClass="progress-bar" visible="false" />
+                <Button fx:id="launchButton" mnemonicParsing="false" text="ИГРАТЬ" styleClass="launch-button" />
+            </VBox>
+            <VBox fx:id="settingsView" alignment="CENTER" spacing="20.0" visible="false">
+                <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
+                <Label styleClass="settings-title" text="Настройки" />
+                <VBox alignment="CENTER" maxWidth="250.0" spacing="5.0">
+                    <Label styleClass="status-label" text="Оперативная память (GB)" />
+                    <Slider fx:id="ramSlider" max="16" min="2" value="4" majorTickUnit="2" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="ram-slider" />
+                </VBox>
+                <VBox alignment="CENTER_LEFT" maxWidth="250.0" spacing="5.0">
+                    <Label styleClass="status-label" text="Путь установки клиента" />
+                    <TextField fx:id="gamePathField" editable="false" styleClass="path-field" />
+                    <Button fx:id="changePathButton" text="Изменить..." styleClass="button-alt" maxWidth="Infinity" />
+                </VBox>
+                <Button fx:id="backButton" mnemonicParsing="false" text="Назад" styleClass="button-secondary" />
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>
