@@ -1,1 +1,89 @@
+# Имя рабочего процесса
+name: Build and Release Application
 
+# Триггер: запускать при пуше в ветку main
+on:
+  push:
+    branches: [ "main" ]
+
+# Задачи, которые будут выполняться
+jobs:
+  # --- Задача для сборки под Windows ---
+  build-windows:
+    # Запускать на виртуальной машине с Windows
+    runs-on: windows-latest
+    steps:
+      # 1. Скачиваем код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем правильную версию Java (Zulu JDK 21)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+
+      # 3. Собираем проект с помощью Maven
+      # Команда clean package удалит старые файлы и создаст новый пакет
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      # 4. Архивируем готовую сборку из папки dist
+      - name: Archive Windows build
+        shell: pwsh
+        run: Compress-Archive -Path "dist/*" -DestinationPath "cobuilding-launcher-windows.zip"
+
+      # 5. Загружаем архив как артефакт, чтобы его можно было скачать
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobuilding-launcher-windows
+          path: cobuilding-launcher-windows.zip
+
+  # --- Задача для сборки под macOS (ARM, M1/M2/M3) ---
+  build-macos-arm:
+    # Запускать на виртуальной машине с macOS 14
+    runs-on: macos-14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 21 for ARM
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          architecture: arm64
+      - name: Build with Maven
+        run: mvn -B clean package
+      - name: Archive macOS ARM build
+        shell: bash
+        run: cd dist && zip -r ../cobuilding-launcher-macos-arm64.zip .
+      - name: Upload macOS ARM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobuilding-launcher-macos-arm64
+          path: cobuilding-launcher-macos-arm64.zip
+
+  # --- Задача для сборки под macOS (Intel) ---
+  build-macos-intel:
+    runs-on: macos-14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 21 for Intel
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          architecture: x64
+      - name: Build with Maven
+        run: mvn -B clean package
+      - name: Archive macOS Intel build
+        shell: bash
+        run: cd dist && zip -r ../cobuilding-launcher-macos-x64.zip .
+      - name: Upload macOS Intel Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobuilding-launcher-macos-x64
+          path: cobuilding-launcher-macos-x64.zip
