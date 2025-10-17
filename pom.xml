@@ -78,10 +78,9 @@
                                 <path>${project.build.directory}/${project.build.finalName}.jar</path>
                             </modulePaths>
                             <module>${main.module}/${main.class}</module>
-
-                            <icon>src/main/resources/com/cobuilding/cblogored.ico</icon>
-                            <macIcon>src/main/resources/com/cobuilding/cblogored.icns</macIcon>
-                            <winConsole>true</winConsole>
+                            
+                            <icon>${jpackage.icon}</icon>
+                            
                             <verbose>true</verbose>
 
                         </configuration>
@@ -90,4 +89,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <jpackage.icon>src/main/resources/com/cobuilding/cblogored.ico</jpackage.icon>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <configuration>
+                            <winConsole>true</winConsole>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <jpackage.icon>src/main/resources/com/cobuilding/cblogored.icns</jpackage.icon>
+            </properties>
+        </profile>
+    </profiles>
 </project>
