@@ -34,18 +34,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.3.2</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${project.basedir}/dist</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
             </plugin>
@@ -91,20 +79,12 @@
                             </modulePaths>
                             <module>${main.module}/${main.class}</module>
 
-                            <mac>
-                                <icon>src/main/resources/com/cobuilding/cblogored.icns</icon>
-                            </mac>
-                            <win>
-                                <icon>src/main/resources/com/cobuilding/cblogored.ico</icon>
-                            </win>
+                            <icon>src/main/resources/com/cobuilding/cblogored.ico</icon>
+                            <macIcon>src/main/resources/com/cobuilding/cblogored.icns</macIcon>
+                            <winConsole>true</winConsole>
+                            <verbose>true</verbose>
 
-                            <arguments>
-                                <argument>--verbose</argument>
-                            </arguments>
-                            <winArguments>
-                                <argument>--win-console</argument>
-                            </winArguments>
-                            </configuration>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
