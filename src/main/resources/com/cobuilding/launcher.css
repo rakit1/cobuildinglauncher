@@ -63,7 +63,7 @@
 }
 .button-alt:hover { -fx-background-color: #f24941; -fx-text-fill: white; }
 
-.progress-bar .bar { -fx-background-color: #f24941; -fx-background-insets: 0; -fx-padding: 0.25em; -fx-background-radius: 8px; }
+.progress-bar .bar { -fx-background-color: #f24941; -fx-padding: 0.25em; -fx-background-radius: 8px; }
 .progress-bar .track { -fx-background-color: #1e1e24; -fx-background-insets: 0; -fx-background-radius: 8px; -fx-border-color: #303038; -fx-border-radius: 8px; }
 
 .ram-slider .axis { -fx-tick-label-fill: #8c8c9a; -fx-font-size: 10px; }
@@ -113,4 +113,5 @@
 .custom-dialog-root .dialog-buttons .button-secondary {
     -fx-font-size: 14px;
     -fx-padding: 8px 25px;
+
 }
