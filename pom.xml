@@ -145,13 +145,13 @@
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
                     <version>${javafx.version}</version>
-                    <classifier>mac-x64</classifier>
+                    <classifier>mac</classifier>
                 </dependency>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-fxml</artifactId>
                     <version>${javafx.version}</version>
-                    <classifier>mac-x64</classifier>
+                    <classifier>mac</classifier>
                 </dependency>
             </dependencies>
         </profile>
