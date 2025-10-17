@@ -18,18 +18,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-            <classifier>${os.classifier}</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-            <classifier>${os.classifier}</classifier>
-        </dependency>
     </dependencies>
 
     <build>
@@ -96,31 +84,76 @@
                 </os>
             </activation>
             <properties>
-                <os.classifier>win</os.classifier>
                 <jpackage.icon>src/main/resources/com/cobuilding/cblogored.ico</jpackage.icon>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>win</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>win</classifier>
+                </dependency>
+            </dependencies>
         </profile>
+
         <profile>
-            <id>mac</id>
+            <id>mac-arm</id>
             <activation>
                 <os>
                     <family>mac</family>
+                    <arch>aarch64</arch>
                 </os>
             </activation>
             <properties>
-                <os.classifier>mac-aarch64</os.classifier> <jpackage.icon>src/main/resources/com/cobuilding/cblogored.icns</jpackage.icon>
+                <jpackage.icon>src/main/resources/com/cobuilding/cblogored.icns</jpackage.icon>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>mac-aarch64</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>mac-aarch64</classifier>
+                </dependency>
+            </dependencies>
         </profile>
+
         <profile>
-            <id>linux</id>
+            <id>mac-intel</id>
             <activation>
                 <os>
-                    <family>linux</family>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
                 </os>
             </activation>
             <properties>
-                <os.classifier>linux</os.classifier>
+                <jpackage.icon>src/main/resources/com/cobuilding/cblogored.icns</jpackage.icon>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>mac-x64</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>mac-x64</classifier>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 </project>
