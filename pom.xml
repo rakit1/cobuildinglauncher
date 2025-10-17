@@ -83,7 +83,6 @@
                             <appVersion>1.0.0</appVersion>
                             <vendor>cobuilding</vendor>
                             <destination>dist</destination>
-
                             <type>APP_IMAGE</type>
 
                             <modulePaths>
@@ -98,7 +97,14 @@
                             <win>
                                 <icon>src/main/resources/com/cobuilding/cblogored.ico</icon>
                             </win>
-                        </configuration>
+
+                            <arguments>
+                                <argument>--verbose</argument>
+                            </arguments>
+                            <winArguments>
+                                <argument>--win-console</argument>
+                            </winArguments>
+                            </configuration>
                     </execution>
                 </executions>
             </plugin>
