@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.net.ssl.SSLContext; // <-- Добавлено
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,8 +27,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.KeyManagementException; // <-- Добавлено
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchAlgorithmException; // <-- Добавлено
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -80,8 +82,20 @@ public class LauncherController {
     private Path javaDirectoryPath;
     private final Path configFilePath = Paths.get(System.getProperty("user.home"), ".aurora-launcher-config.txt");
 
-    private static final HttpClient httpClient = HttpClient.newBuilder()
-            .followRedirects(HttpClient.Redirect.ALWAYS).build();
+    // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
+    private static final HttpClient httpClient;
+    static {
+        try {
+            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+            sslContext.init(null, null, null);
+            httpClient = HttpClient.newBuilder()
+                    .sslContext(sslContext)
+                    .followRedirects(HttpClient.Redirect.ALWAYS)
+                    .build();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException("Критическая ошибка: не удалось инициализировать HttpClient для лаунчера", e);
+        }
+    }
 
     @FXML
     public void initialize() {
